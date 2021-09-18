@@ -3,6 +3,9 @@
 #include "Reducer.h"
 #include "bqfc.c"
 
+#include "picosha2.h"
+#include "vdf_new.h"
+#include "nucomp.h"
 const int B_bits = 264;
 const int B_bytes = (B_bits + 7) / 8;
 

@@ -6,7 +6,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-
+#include "integer.h"
 struct qfb_c {
     mpz_t a;
     mpz_t t;

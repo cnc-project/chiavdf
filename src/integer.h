@@ -4,6 +4,7 @@
 #include "integer_common.h"
 #include "xgcd_partial.c"
 
+#include "parameters.h"
 //a and b are nonnegative
 void xgcd_partial(integer& u, integer& v, integer& a, integer& b, const integer& L) {
     mpz_t f_u; mpz_init(f_u);
