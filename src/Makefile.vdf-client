@@ -27,10 +27,10 @@ endif
 
 .PHONY: all clean
 
-all: vdf_client prover_test 1weso_test 2weso_test vdf_bench
+all: vdf_client prover_test 1weso_test 2weso_test vdf_bench imp_vdf.o c_interface.o libcgo.so libzcnt.so
 
 clean:
-	rm -f *.o vdf_client prover_test 1weso_test 2weso_test compile_asm vdf_bench
+	rm -f *.o vdf_client prover_test 1weso_test 2weso_test compile_asm vdf_bench imp_vdf.o c_interface.o libcgo.so libzcnt.so
 
 vdf_client vdf_bench prover_test 1weso_test 2weso_test avx512_test: %: %.o lzcnt.o asm_compiled.o avx2_asm_compiled.o avx512_asm_compiled.o
 	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
@@ -51,3 +51,15 @@ avx512_asm_compiled.s: compile_asm
 
 compile_asm: compile_asm.o
 	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
+imp_vdf.o: imp_vdf.cpp
+	$(CXX) -c imp_vdf.cpp
+
+c_interface.o: c_interface.c
+	$(CXX) -c c_interface.c
+
+libcgo.so: c_interface.o imp_vdf.o
+	ar r libcgo.so c_interface.o imp_vdf.o
+
+libzcnt.so: lzcnt.o
+	ar r libzcnt.so lzcnt.o
