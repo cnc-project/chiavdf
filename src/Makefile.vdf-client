@@ -59,7 +59,7 @@ c_interface.o: c_interface.c
 	$(CXX) -c c_interface.c
 
 libcgo.a: c_interface.o imp_vdf.o
-	ar r libcgo.so c_interface.o imp_vdf.o
+	ar r libcgo.a c_interface.o imp_vdf.o
 
 libzcnt.a: lzcnt.o
-	ar r libzcnt.so lzcnt.o
+	ar r libzcnt.a lzcnt.o
